@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form"
 import { SignupValidation } from "@/lib/validation";
 import { z } from "zod";
 import { Loader } from "lucide-react"
+import { createUserAccount } from "@/lib/appwrite/api"
 
 
 const SignupForm = () => {
@@ -33,8 +34,10 @@ const SignupForm = () => {
   })
  
   
-  function onSubmit(values: z.infer<typeof SignupValidation>) {
-  
+  async function onSubmit(values: z.infer<typeof SignupValidation>) {
+    const newUser = await createUserAccount(values);
+
+    console.log(newUser);
   }
   return (
     <Form {...form}>
